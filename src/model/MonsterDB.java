@@ -1,4 +1,7 @@
 package model;
+//in this minigame 2, you do not need MonsterDB but this is useful for the
+// final project. Think about how you can apply this to ItemDB.
+
 
 import controller.Monster;
 

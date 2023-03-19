@@ -1,5 +1,7 @@
 package model;
 
+import controller.GameException;
+import controller.Item;
 import controller.Room;
 
 import java.sql.ResultSet;
@@ -16,6 +18,10 @@ public class RoomDB {
      * Purpose: gets the next ID for a room
      * @return int
      */
+
+    private ArrayList<Room> rooms = new ArrayList<Room>();
+
+
     public int getNextRoomID() throws SQLException {
         SQLiteDB sdb = null;
         try {
@@ -87,4 +93,41 @@ public class RoomDB {
         sdb.close();
         return rooms;
     }
+
+
+    //you will need to create a getItems() method
+    public ArrayList<Item> getItems(int roomID) throws GameException{
+            return null;
+    }
+
+    public String getMap(){
+        return null;
+    }
+
+
+    public ArrayList<Room> getRooms(){
+        return rooms;
+    }
+
+    public void updateRoom(int roomID) throws GameException, SQLException,
+            ClassNotFoundException{
+        SQLiteDB sdb = new SQLiteDB();
+        String sql = "UPDATE ROOM SET visited = 1 WHERE roomNumber = " + roomID;
+        sdb.updateDB(sql);
+        sdb.close();
+
+    }
+
+    public int isVisited(int roomID) throws SQLException, ClassNotFoundException {
+        int visitedNum = 0;
+        SQLiteDB sdb = new SQLiteDB();
+        String sql = "SELECT visited FROM ROOM WHERE roomNumber = " + roomID;
+        ResultSet rs = sdb.queryDB(sql);
+        while(rs.next()) {
+            visitedNum = rs.getInt("visited");
+        }
+        sdb.close();
+        return visitedNum;
+    }
+
 }
