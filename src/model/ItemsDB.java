@@ -17,10 +17,9 @@ public class ItemsDB {
         String sql = "SELECT * FROM ITEM WHERE itemID = " + itemId;
         ResultSet rs = sqLiteDB.queryDB(sql);
         while(rs.next()) {
-
-            //check the MonsterDB's getMonster. Almost identical.
-
-
+            item.setItemID(rs.getInt("itemID"));
+            item.setItemName(rs.getString("itemName"));
+            item.setItemDescription(rs.getString("itemDescription"));
         }
         sqLiteDB.close();
         return item;
